@@ -1,0 +1,132 @@
+section.sobre{
+  article{
+    > img.jcem,
+    > img.logo{
+      max-height: 5.9rem;
+      float: left;
+      margin: 5rem 0 !important;
+      margin-right: 8rem !important;
+      clear: both;
+    }
+
+    > img.logo{
+      max-height: 10.85rem;
+    }
+  }
+
+  h1{
+    font-size: 3rem;
+  }
+  h2{
+    font-size: 2rem;
+    &:first-of-type{
+      margin-top: 0!important;
+    }
+  }
+
+  div.texto{
+    white-space: nowrap;
+
+    p{
+      margin-top: .5rem;
+    }
+  }
+
+  article{
+    blockquote{
+      display: inline-block;
+      margin: 1rem .6rem;
+      white-space: normal;
+
+      &:before{
+        color: #d36484;
+      }
+
+      &,*{
+        color: #2b92db;
+      }
+
+      > span{
+        white-space: normal;
+        font-size: 1.5rem !important;
+      }
+    }
+  }
+
+  section.ajude{
+    background: #2b92db;
+    padding: 3rem 0;
+
+    > div{
+      color: #fff;
+      text-align: center;
+      font-size: 1.7rem;
+
+      > div{
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .globe > *{
+        padding: 0.1rem;
+        margin: 0.1rem;
+        background: rgba(0,0,0,.1);
+      }
+    }
+
+    a, i{
+      padding: .3rem;
+      margin: .1rem;
+      display: inline-block;
+      cursor: pointer;
+      text-decoration: none !important;
+
+      &,*{
+        &,&:before,&:after{
+          color: #fff;
+          font-size: 3rem;
+        }
+      }
+
+      &:hover{
+        &,*{
+          &,&:before,&:after{
+            color: cyan;
+          }
+        }
+      }
+
+      &:after{
+        display: none !important;
+      }
+
+      &:not(.doe){
+        span{
+          display: none;
+        }
+      }
+
+      &.doe{
+        padding: .7rem;
+        margin-right: .8rem;
+        border: 1px solid rgba(255,255,255,.05);
+        @include border-radius(.35rem);
+
+        &:hover{
+          border-color: cyan;
+        }
+
+        span{
+          font-size: 1.3rem;
+          float: left;
+          margin-top: 28%;
+          margin-right: .4rem;
+        }
+
+        &:before{
+          content: '\f4c0';
+        }
+      }
+    }
+  }
+}

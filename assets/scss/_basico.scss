@@ -1,0 +1,244 @@
+*{
+  @extend .fontpadrao;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  @include box-sizing(border-box);  
+}
+
+html, body{
+  height: 100%; 
+  min-width: 2*$PrincipalIcon+3em;
+  box-sizing:border-box;
+  // http://jsfiddle.net/hf4gap4v/
+  scroll-behavior: smooth;
+}
+
+header, nav, aside, article, section, footer{
+  display: block;
+}
+
+h1,h2,h3,h4,h5,h6,h7{
+  display: block;
+  border-bottom: 1px solid transparent;
+  text-align: left;
+  margin: 0.5em 0;
+}
+
+html{
+  height: 100%;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;  
+ 
+}
+
+
+html,#about{
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.clearfix {
+  @include clearfix;
+}
+
+.tipsy{
+  white-space: nowrap;
+  @include box-sizing(content-box);
+  font-size: .9em;
+  margin-top: -$barraEsquerdaFechada;
+  font-weight: bold;
+
+  &,
+  .tipsy-inner{
+    border-color: #000 !important;
+  }
+}
+
+.ie11 body{
+  display: none;
+}
+
+textarea:focus, input[type="text"], input[type="search"]{
+  outline: 0;
+}
+
+.ocultarscroll{
+  &::-webkit-scrollbar { 
+    width: 0 !important;
+    height: 0 !important;
+  }
+  
+  -ms-overflow-style: none;
+  
+  overflow: -moz-scrollbars-none;
+}
+
+.exibir,
+.ocultar{
+  @include transition(.5s, 0s);
+}
+
+.exibir{
+  @include opacity(100, true);  
+}
+
+.ocultar{
+  @include opacity(0, true);  
+}
+
+
+article{
+  ol, ul{
+    li{
+      margin-bottom: .5em;
+    }
+  }
+
+
+  > ol, > ul{
+    &.lei,
+    &.leis{
+      &,*{
+        line-height: 1.4em !important;
+      }
+
+      &, li, span, b, strong, i, p{
+        &,&:before{
+          font-size: 1rem !important;
+        }
+      }
+
+      list-style-type: none;
+      counter-reset: _sessoes _artigos _capitulos _titulo;
+      padding-left: 0;
+
+      li{
+        margin-bottom: .7em;
+
+        &:before{
+          display: inline-block;
+          margin-right: .5em;
+          font-weight: bold;
+        }
+      }
+
+      > li{
+        margin-top: 1em;
+        margin-left: 0;
+        list-style-type: none;
+        counter-reset: _paragrafos;
+
+        &:before{
+          content: "Art. " counter(_artigos) "º";
+          counter-increment: _artigos;
+        }
+
+        p{
+          margin: 0;
+          padding: 0;
+          margin-left: 0;
+          padding-left: 0;
+
+          &:before{
+            content: "§ " counter(_paragrafos) "º. ";
+            counter-increment: _paragrafos;
+            display: inline-block;
+            margin-right: .5em;
+            margin-left: 0;
+            padding-left: 0;
+            font-weight: bold;
+          }
+        }
+
+        p.unico{
+          &:before{
+            content: "Parágrafo único.";
+          }
+        }
+
+        > ol, > ul{
+          margin: .5em 0;
+          list-style-type: none;
+          counter-reset: _incisos;
+          margin-left: 1.2em;
+
+          > li{
+            &:before{
+              content: ": -";
+              content: counter(_incisos, upper-roman) ".";
+              counter-increment: _incisos;
+            }
+
+            > ol, > ul{
+              margin: .5em 0;
+              list-style-type: none;
+              counter-reset: _alineas;
+              margin-left: 1.2em;
+
+              > li{                
+                &:before{
+                  content: counter(_alineas, lower-alpha) ")";
+                  counter-increment: _alineas;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      > h1, > h2, > h3{
+        text-transform: uppercase;
+        margin: 1.5em 0;
+
+        margin-top: 2.5em;
+
+        &:before{
+          display: inline-block;
+          margin-right: .4em;
+        }
+      }
+
+      > h1{
+        text-align: center;
+        font-size: 1.7rem;
+
+        &:before{
+          display: block;
+          content: "Título " counter(_titulo, upper-roman);
+          counter-increment: _titulo;
+        }
+      }
+
+      > h2{
+        counter-reset: _sessoes;
+        text-align: center;
+        font-size: 1.4rem;
+
+        &:before{
+          display: block;
+          content: "Capítulo " counter(_capitulos, upper-roman);
+          counter-increment: _capitulos;
+        }
+      }
+
+      > h3{
+        font-size: 1.2rem;
+        padding-bottom: .1em;
+        border-bottom: 1px solid rgba(0,0,0,.1);
+
+        &:before{
+          content: "Seção " counter(_sessoes, upper-roman) " - ";
+          counter-increment: _sessoes;
+        }
+      }
+    }
+  }
+
+}

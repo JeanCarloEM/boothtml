@@ -1,0 +1,69 @@
+body{
+  .starvoto{
+    border: 1px solid rgba(0,0,0,.2) !important;
+    padding: .7rem;
+    margin: 1rem;
+    line-height: 1.5rem;
+    display: inline-block !important;
+    text-align: center;
+    background: rgba(0,0,0,.01);
+    @include border-radius(.15rem);
+
+    > i{
+      display: inline-block;
+      float: right;
+      margin: 0 .15rem;
+
+      &:before{
+        text-align: center;
+        content: '\f005';
+        font-family: "Font Awesome 5 Free";
+        font-size: 1.2rem;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        display: block;
+        color: rgba(0,0,0,.4);
+        text-shadow: .1rem .1rem .2rem rgba(0,0,0,.25);
+      }
+
+      &.votos{
+        &,& ~ i{
+          &:before{
+            color: orangered;
+          }
+        }
+      }
+
+      &.meiovoto{
+
+      }
+
+      &.votado{
+        &,& ~ i{
+          &:before{
+            font-weight: bold !important;
+            color: orangered;
+          }
+        }
+      }
+    }
+
+    &:not(.votado){
+      > i{
+        cursor: pointer;
+
+        &:hover{
+          &,& ~ i{
+            &:before{
+              font-weight: bold !important;
+              color: #2b92db !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

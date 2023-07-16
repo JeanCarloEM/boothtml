@@ -1,0 +1,244 @@
+section.sobre,
+section.doe{
+  .toc{
+    margin-left: 1.7rem;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+
+    li{
+      cursor: pointer;
+    }
+  }
+
+  h1{
+    font-size: 2rem;
+  }
+
+  .doacao{
+    div.opcoes{
+      text-align: left !important;
+
+      p{
+        text-align: justify !important;
+      }
+
+      @media screen and (max-width: 609.9px) {
+        text-align: center !important;
+      }
+    }
+
+    div.conta{
+      > img.bb{
+        max-height: 5.1rem;
+        float: left !important;
+        margin: 0 !important;
+        margin-right: .8rem !important;
+      }
+    }
+
+    img.doe{
+      margin: 0 !important;
+      margin-bottom: .8rem !important;
+      max-height: 6rem;
+    }
+
+    div.conta{
+      float: left;
+      width: 22.5rem;
+      border: 1px solid #cdb864;
+      height: 9.5rem;
+      padding: 2rem .5rem;
+      margin: 1rem .25rem;
+
+      @media screen and (max-width: 609.9px) {
+        width: initial;
+        float: initial;
+      }
+    }
+
+
+    a.doe{
+      margin: 1rem .25rem;
+      padding: .7rem;
+      display: inline-block;
+      text-decoration: none !important;
+
+      > img{
+        margin: 0 !important;
+        margin-bottom: .5rem !important;
+      }
+
+      &.doe5,
+      &.doe15,
+      &.doe25{
+        &:not(:hover){
+          background: #d36484;
+        }
+      }
+
+      > div{
+        color:#fff;
+        text-align: center;
+      }
+
+      &:hover{
+        > div{
+          color:#111;
+        }
+      }
+    }
+
+    div.formulas{
+      float: right;
+
+      padding: .5rem;
+      margin: 2rem .5rem;
+      background: #eee;
+
+      > img{
+        padding: 0;
+        margin: 1rem 0;
+        max-height: 9rem;
+        max-width: 75vw;
+      }
+    }
+
+    table.zebra{
+      margin: 1rem .5rem;
+      tr{
+        &:first-of-type{
+          background: #999 !important;
+          
+          td{            
+            color: #fff;
+            font-weight: bold;
+            border-top: 1px solid rgba(0,0,0,.2);
+          }
+        }
+
+        td{
+          color: #222;
+          text-align: right;
+          padding: .5rem;
+          background: transparent;
+          border-bottom: 1px solid rgba(0,0,0,.2);
+          border-right: 1px solid rgba(0,0,0,.2);
+
+          &:first-of-type{
+            white-space: nowrap;
+            text-align: left;
+            border-left: 1px solid rgba(0,0,0,.2);
+          }
+
+          &:last-of-type{
+            white-space: nowrap;
+          }
+
+          &.item{
+            text-align: center !important;
+
+            &,*{
+              color: green;
+            }
+          }
+
+          &.titem{            
+            max-width: calc(8vh - 1em);
+            min-width: calc(1.5em);
+            text-align: center !important;            
+
+            > span{              
+              writing-mode: vertical-lr;
+              max-width: 100%;
+
+              &,*{
+                color: #fff;
+              }
+            }
+          }
+
+          &.last{
+            text-align: center !important;
+            font-weight: bold;
+          }
+
+          &.c3{
+            background: rgba(219, 147, 43, .1);
+          }
+          &.c4{
+            background: rgba(219, 147, 43, .25);
+          }
+          &.c5{
+            background: rgba(219, 147, 43, .4);
+          }
+        }
+
+
+        &:nth-child(odd){
+          background: rgba(0,0,0,.1);
+        }
+
+        &:hover{
+          background: yellow;
+        }
+
+        &.subtotal{
+          background: rgba(211, 100, 132, .5);
+        }
+        &.bruto{
+          background: #d36484;
+
+          td{
+            &,*{
+              color: #fff;
+            }
+          }
+        }
+        &.final{
+          background: #aaa;
+
+          td{
+            &,*{
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+
+    &.recompensas{
+      ul{
+        margin-left: 1.5rem;
+        li{
+          white-space: normal !important;
+        }
+      }
+
+      div.precos{
+        text-align: center !important;
+      }
+    }
+
+    &.kickante{
+      .btbs{
+        line-height: 10.5rem;
+        vertical-align: middle;
+      }
+
+      form,
+      .btb{
+        display: inline-block;
+        max-height: 10.5rem;
+        min-height: 10.5rem;
+        vertical-align: middle;
+      }
+
+      form{
+        margin: 1rem .3rem;
+        border: 1px solid #e0d4bc;
+        padding: 3.5rem .5rem;
+      }
+    }
+  }
+}

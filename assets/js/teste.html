@@ -1,0 +1,76 @@
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Twitter API: Tweet Button Callbacks</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" crossorigin="anonymous" href="http://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cDovL2ZpZGRsZS5qc2hlbGwubmV0L0VaNHd1Lzg4L3Nob3cvbGlnaHQv"><script id="twitter-wjs" src="//platform.twitter.com/widgets.js"></script><script type="text/javascript" src="//code.jquery.com/jquery-compat-git.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+    <style id="compiled-css" type="text/css">
+
+    </style>
+    
+    <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+<script type="IN/Share" data-url="https://www.linkedin.com"></script>
+
+  </head>
+  <body>
+    <a id='tester' href="https://twitter.com/intent/tweet?url=https://www.webniraj.com/2012/09/11/twitter-api-tweet-button-callbacks/&amp;text=Twitter+API:+Tweet+Button+Callbacks"><i class="icon-twitter-sign icon-white"></i> Tweet</a>
+
+    <!-- TODO: Missing CoffeeScript 2 -->
+
+    <script type="text/javascript">//<![CDATA[
+
+
+      function loguser(event) {
+        if (event) {
+          alert('Tweeted');
+          console.log(event);
+        }
+      }
+
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+          return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = {_e: [], ready: function (f) {
+            t._e.push(f)
+          }});
+      }(document, "script", "twitter-wjs"));
+
+      twttr.ready(function (twttr) {
+        twttr.events.bind('tweet', loguser);
+      });
+
+
+      //]]></script>
+
+    <script>
+      // tell the embed parent frame the height of the content
+      if (window.parent && window.parent.parent) {
+        window.parent.parent.postMessage(["resultsFrame", {
+            height: document.body.getBoundingClientRect().height,
+            slug: "EZ4wu"
+          }], "*")
+      }
+
+      // always overwrite window.name, in case users try to set it manually
+      window.name = "result";
+
+      function events() {
+        jQuery._data($("#tester").get(0), "events").click[0].handler;
+      }
+    </script>
+
+
+  </body></html>

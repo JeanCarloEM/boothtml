@@ -1,0 +1,30 @@
+body{
+  section.global.mapa{
+    ul{
+      margin-left: .7rem;
+      list-style-type: none !important;
+
+      > li{
+        padding: .2rem;
+        white-space: nowrap;
+        list-style-type: none !important;
+
+        > i:before{
+          color: #bbb;
+          margin-right: .2rem;
+        }
+      }
+    }
+
+    div.demais{
+      @media screen and (min-width: 540px) {
+        column-count: 2;
+      }
+
+      ul{
+        > li{
+        }
+      }
+    }
+  }
+}

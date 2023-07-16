@@ -1,0 +1,128 @@
+<body data-cookies="/termos-e-condicoes-de-uso"
+  class="default<?php echo $isMain ? ' mainpage' : ''; ?><?php echo classeURL($_URL); ?>"
+  data-originador="<?php echo @$_SESSION['originado']; ?>" data-cmpl="<?php echo @$_SESSION['cmpl']; ?>"
+  data-device-id="<?php echo @$_SESSION['device-rand-id']; ?>"
+  entenda='<?php echo \filemtime(__DIR__ . DIRECTORY_SEPARATOR . ' .entenda.php') ?>'>
+  <div class='ocult'></div>
+  <div class='osave'></div>
+  <div class="__loader sk-rotating-plane show" style=""></div>
+  <div class="__loader progressicon show">
+    <div></div>
+  </div>
+
+  <div class="calc_load">
+    <img src="assets/img/calc-anime.gif" alt="animação calculadora" />
+    <div class="escondido">
+      <h4>Demorando?</h4>
+      <p>Alguns cálculos exigem mais tempo de processamento, podendo excepcionalmente ultrapassar 1 minuto que, por
+        padrão, é tempo suficiente.</p>
+      <p class="par2"><b>Ainda estamos aqui!</b></p>
+      <p class="par3"><b>Cálculo complexo esse!</b></p>
+      <p class="par4"><b>Demorando D+</b> Se o servidor não responder logo, desistiremos, mas, tente novamente em alguns
+        minutos.</p>
+    </div>
+  </div>
+
+  <div class="fa-body" style="display: none;">
+    <div class="loading" style="display: none;">
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <?php
+      $bar = DIRECTORY_SEPARATOR;
+      //require_once __DIR__ . $bar . "lib$bar" . "FastAuth$bar" . "www$bar" . "html$bar" . "form.php";
+      ?>
+  </div>
+
+  <?php if ($isMain) { ?>
+  <input id="calc_show" type="checkbox" class='shower' <?php echo ((\trim(\strtolower(_O_URL))==='calcular' )
+    ? ' checked' : '' ); ?> />
+  <?php } ?>
+
+  <input id="mainmenu" type="checkbox" class="menu" />
+
+  <header class='first' code='<?php
+                                echo strlen(codigo()) > 0 ? codigo() : codigo(ChaveSeguraAleatoria());
+                                ?>' code2='<?php
+                                            echo strlen(codigo_vote()) > 0 ? codigo_vote() : codigo_vote(ChaveSeguraAleatoria());
+                                            ?>'>
+    <div class="colunabarra">
+      <a href='./'><img src="assets/img/logo_nome.svg?v=<?php echo \filemtime('assets/img/logo_nome.svg'); ?>"
+          class="logoheader" atl="logo" /></a>
+      <ul class="menu">
+        <li class='likes'>
+          <span<?php echo likedo() ? ' class="likedo"' : '' ; ?>>
+            <?php
+                                                                  echo getLikes();
+                                                                  ?></span><img alt='Loading'
+              src="assets/img/loading.gif" class="loading" />
+            <?php
+              if (likedo()) {
+                echo '<i class="fas fa-thumbs-up likedo"></i>';
+              } else {
+                echo '<i class="far fa-thumbs-up"></i>';
+              }
+              require 'paginas/_starsvote.php';
+            ?>
+        </li>
+        <?php if ($isMain) { ?>
+        <li class="play"><i class="fas fa-play"></i></li>
+        <li class="home"><i class="fas fa-home"></i></li>
+        <?php } ?>
+        <li>
+          <label for='mainmenu' class="fas fa-bars"></label>
+          <div class='ofuscate'></div>
+          <nav class="menu">
+            <ul class="open">
+              <label for='mainmenu'></label>
+              <!--<li><label for='mainmenu'></label><a class='entrar' href="/entrar"><span>Entrar</span></a></li>-->
+              <li><label for='mainmenu'></label>
+                <hr />
+              </li>
+              <?php if ($isMain) { ?>
+              <li><label for='mainmenu'></label><a class='home'><span>Início</span></a></li>
+              <li><label for='mainmenu'></label><a class='start'><span>Começar</span></a></li>
+              <li><label for='mainmenu'></label>
+                <hr />
+              </li>
+              <?php } ?>
+              <li><label for='mainmenu'></label><a class='sobre' href="/sobre"><span>Sobre</span></a></li>
+              <li><label for='mainmenu'></label><a class='termos' href="/termos-e-condicoes-de-uso"><span>Termos de
+                    Uso</span></a></li>
+              <li><label for='mainmenu'></label><a class='termosadd' href="/termos"><span>Termos Adicionais</span></a>
+              </li>
+              <li><label for='mainmenu'></label><a class='privacidade'
+                  href="/politica-de-privacidade-e-seguranca"><span>Privacidade</span></a>
+              </li>
+              <li><label for='mainmenu'></label><a class='avisos' href="/avisos"><span>Avisos</span></a></li>
+              <li><label for='mainmenu'></label><a class='licenca' href="/licenca"><span>Licença</span></a></li>
+              <li><label for='mainmenu'></label>
+                <hr />
+              </li>
+              <li><label for='mainmenu'></label><a class='doe' href="/doe"><span>Doe</span></a></li>
+              <li><label for='mainmenu'></label>
+                <hr />
+              </li>
+              <li>
+                <h4>Compartilhe</h4>
+              </li>
+              <li><label for='mainmenu' class="social" data-social="facebook"></label><a target='_blank'
+                  class='social facebook' data-social="facebook"><span>Facebook</span></a></li>
+              <li><label for='mainmenu' class="social" data-social="twitter"></label><a target='_blank'
+                  class='social twitter' data-social="twitter"><span>Twitter</span></a></li>
+              <li><label for='mainmenu' class="social" data-social="linkedin"></label><a target='_blank'
+                  class='social linkedin' data-social="linkedin"><span>Linkedin</span></a></li>
+              <li><label for='mainmenu'></label><a target='_blank' class='social whatsapp'
+                  href="https://api.whatsapp.com/send?text=Eu%20descobri%20quando%20e%20como%20ser%20livre%20financeiramente,%20e%20voc%C3%AA?%20%E2%80%94%20#(HOST)"
+                  data-social="whasapp"><span>Whatsapp</span></a></li>
+            </ul>
+          </nav>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+</body>

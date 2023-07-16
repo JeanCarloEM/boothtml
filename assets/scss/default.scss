@@ -1,0 +1,307 @@
+/*!
+ * -----------------------------------------------------------------------------
+ * LICENCE: GNU LESSER GENERAL PUBLIC LICENSE version 3 (ou posterior)
+ * -----------------------------------------------------------------------------
+ * @package   Grafittano
+ * @author    Jean Carlo de Elias Moreira | http://www.jeancarloem.com
+ * @copyright (c) 2014 Jean Carlo de Elias Moreira | http://www.jeancarloem.com
+ * @license   http://www.gnu.org/licenses/lgpl.html
+ * @link      http://opensource.jeancarloem.com/Grafittano, https://github.com/JeanCarloEM/Grafittano
+ */
+
+@import "_variaveis.scss"; 
+@import "_mixins.scss";
+@import "_cores.scss";
+
+body{
+  &.margens{
+    section.main{
+      article{
+        border: 1px solid red;
+
+
+        > div.margindivisa{        
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background: red;
+          z-index: 1000;
+
+          &.d1{
+            left: 99mm;
+          }
+
+          &.d2{
+            left: 2*99mm;
+          }
+        }
+      }
+    }
+  }  
+
+  > section.main{
+    section.principal{
+      > article{
+        width: 297mm !important;
+        height: 210mm !important;
+
+        overflow: hidden !important;
+
+        margin: 0 !important;
+        padding: 0 3*$margins !important;
+
+        margin-bottom: 2em !important;
+        margin-left: 1em !important;        
+
+        &:last-of-type{
+          margin-bottom: 3em !important;
+        }
+
+        &,&:last-of-type{
+          @media print {
+            margin-bottom: 0 !important;
+            margin-left: 0 !important;
+          }
+        }
+
+        > div.margindivisa{
+          display: none;
+
+          position: absolute !important;
+          top: 0;
+          bottom: 0;
+          heigth: auto;
+
+          width: 1px;
+
+          background: red;
+          z-index: 1000;
+
+          &.d1{
+            left: 99mm;
+          }
+
+          &.d2{
+            left: 2*99mm;
+          }
+
+          @media print {
+            display: none !important;
+          }
+        }        
+
+        > div.marca{       
+          width: $cw;
+          height: $h;
+          top: 0;
+          z-index: 1;
+          padding: 0;
+
+          &.c1{
+            left: 0*$cw - $margins/2;
+          }
+
+          &.c2{
+            left: 1*$cw - $margins/2;
+          }
+          
+          &.c3{
+            left: 2*$cw - $margins/2;
+          }
+
+          > aside{
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            &{
+              z-index: 100;
+            }
+
+            *{
+              z-index: 101;
+            }
+
+            width: $margins !important;
+            height: $h !important;
+
+            max-width: $margins;
+
+            //background: url('../img/bk2.svg');
+            background: nth($preto, 2);
+            background-size: $margins auto;
+            background-repeat: repeat;
+          }
+
+          &,>div{
+            white-space: nowrap !important;
+          }
+
+          > div{
+            position: absolute;
+
+            background: nth($preto, 20);
+            background-size: $margins auto;
+            background-repeat: repeat;
+
+            padding: .3em;
+            z-index: 200;
+
+            > span{
+              @include border-radius(1em);
+
+              background: nth($preto, 20);
+
+              border: 1px solid nth($preto, 20);
+              padding: 0.2em 1em;
+              color: $branco;
+              font-weight: bold;
+            }
+
+            &:first-of-type{
+              top: $marginH + $margins/2;
+              padding-right: .3em;
+              padding-left: 3em;
+
+              right: 0;
+              left: 0;
+              min-height: 2em;
+
+              &:before{
+                content: ".";
+                color: nth($preto, 20);
+                display: block;
+
+                position: absolute;
+                right: 1em;
+                top: -.9em;
+                @include border-radius(2em);
+
+                z-index: 5;
+                height: 3.5em;
+                width: 3.5em;
+                background: nth($preto, 20) url('../img/logos/iasd.svg') no-repeat;
+                background-size: 3.2em;
+                background-position: center center;
+              }
+            }
+
+            &:last-of-type{
+              bottom: $marginH + $margins/2;
+              background: nth($preto, 20);
+
+              height: .5em;
+
+              right: 0;
+              left: 0;
+
+              padding-left: .3em;
+              padding-right: 3em;
+
+              >span{
+                margin-top: -1em;
+                position: absolute;
+                left: 2em;
+              }
+            }
+          }
+        }  
+
+        > div.coluna{
+          z-index: 2;
+          height: $h - 6*$marginH;
+          width: $pw;
+
+          @media print {
+            overflow-y: hidden !important;
+          }
+
+          &,
+          & + nav.suspenso{
+            top: 3.5*$marginH;
+          }
+
+          &.c1{
+            &,& + nav.suspenso{
+              left: 0*$cw + $margins;
+            }
+          }
+
+          &.c2{
+            &,& + nav.suspenso{
+              left: 1*$cw + $margins;
+            }
+          }
+
+          &.c3{
+            &,& + nav.suspenso{
+              left: 2*$cw + $margins;
+            }
+          }
+        }
+
+        div.capa{
+          width: $cw;
+          height: $h;
+          right: 0;
+
+          background: url('../img/capas/natal.jfif') no-repeat;
+          background-size:     cover; 
+          background-position: center center;
+          background-size: 100%;
+        }        
+
+        &:first-of-type{
+          > div.marca{
+            &:last-of-type{
+              > div{
+                &:last-of-type{
+                  display: none !important;
+                }
+
+                &:first-of-type{
+                  right: 25%;
+
+                  @include border-radius(0, .7em, .7em, 0);
+
+                  &:before{
+                    background-image: none;
+                    z-index: -1;
+                  }
+
+                  span{
+                    padding-left: 0;
+                    margin-left: 0;
+
+                    &:first-of-type{
+                      position: absolute;
+                      right: .3em;
+                      background: none;
+                      border: none;
+                      width: 3em;
+                      text-align: center;
+                      display: block;
+                      margin-top: -.35em;
+                      padding: 0;
+                      font-size: 1.2em;
+                    }
+                  }
+                }
+              }
+
+              > aside{
+                opacity: .3;
+
+                @media print {
+                  display: none !important;
+                }
+              }
+            }
+          }
+        }        
+      }
+    }
+  }
+}

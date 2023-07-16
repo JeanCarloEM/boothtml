@@ -1,0 +1,23 @@
+{
+  "url": {
+    "bootjs": "/assets/js/boot/",
+    "basehtml": "/pgs/base.html",
+    "loadingexitcall": null,
+    "local": {
+      "js": "/assets/js",
+      "css": "/assets/css",
+      "img": "/assets/img",
+      "fonts": "/assets/fonts",
+      "favicon": "/assets/favicon"
+    }
+  },
+  "i18next": 13,
+  "require": [
+    {
+      "mode": "async",
+      "lnk": [
+        "${cloudflare}/i18next/23.2.11/i18next.min.js"
+      ]
+    }
+  ]
+}

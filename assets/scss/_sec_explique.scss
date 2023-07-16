@@ -1,0 +1,30 @@
+section.explique{
+  > div{
+    min-height: initial;
+
+    p{
+      color: #484028;
+      font-size: 1.5rem;
+    }
+
+    div.mapa{
+      min-height: 8rem;
+      max-height: 55rem;
+      text-align: center;
+      padding: 0;
+      background: url('../img/mapa.png?v=3') no-repeat;
+      background-size:contain;
+      background-position: center center;
+      margin: 0 2rem;
+      clear:both;
+    }
+
+    img.mapa{
+      display: inline-block;
+      width: calc(100% - 1em);
+      height: auto;
+      opacity: 0;
+      max-height: 50rem;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGM,iFAAQ,CACN,OAAO,CAAE,kBAAkB,CAC3B,WAAW,CAAE,GAAG,CAChB,WAAW,CAAE,gCAAgC,CAI/C,0EAAQ,CACN,OAAO,CAAE,kBAAkB,CAC3B,WAAW,CAAE,GAAG",
+"sources": ["../scss/guinalztermos.scss"],
+"names": [],
+"file": "guinalztermos.css"
+}

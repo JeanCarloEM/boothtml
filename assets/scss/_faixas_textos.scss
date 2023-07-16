@@ -1,0 +1,108 @@
+section{
+  > section.faixa.textos{
+    padding: 6.5rem 1rem;
+    min-height: auto;
+
+    p.calc_p{
+      text-align: right !important;
+    }
+
+    label.inline_calc{
+      display: inline-block;
+      margin: .5rem 0;
+      padding: .5rem 1rem;
+      background: rgba(0,0,0,.04);
+      line-height: 1rem;
+      font-weight: bold;
+      color: #555;
+      cursor: pointer;
+
+      @include border-radius(.2rem);
+
+      &:hover{
+        background: rgba(0,0,0,.07);
+        text-decoration: underline;
+      }
+    }
+
+    > *{
+      text-align: center;
+    }
+
+    blockquote{
+      @media (min-width:420px) and (max-width:828px) {
+        max-width: 60%;
+        margin-left: 40%;
+      }
+    }
+
+    div.titulo{
+
+      h2{
+        @media (min-width:420px) and (max-width:560px) {
+          margin-left: -23% !important;
+        }
+      }
+      span{
+        @media (min-width:420px) and (max-width:560px) {
+          margin-left: -35%;
+        }
+      }
+    }
+
+    .quadrante,
+    img{
+      margin: 1.5em !important;
+      display: block;
+      float:contour;
+    }
+
+    .quadrante{
+      min-width: 40%;
+    }
+
+    .quadrante,
+    img.main{
+      margin: 7rem 3rem 1.5rem 0 !important;
+      z-index: 1;
+      //display: none;
+      max-width: calc(40% - 4rem);
+      max-height:calc(100vh - 10rem);
+      float: left;
+
+      @media screen and (max-width: 419px) {
+        margin: 0 !important;
+        max-width: 40%;
+        margin-bottom: 4rem !important;
+        display: inline-block;
+        float: initial;
+      }
+
+      @media screen and (max-width: 828px) {
+        max-height:initial;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+      }
+
+      &:not(.intext){
+        @media screen and (min-width: 828px) {
+          display: block;
+        }
+      }
+
+      /*
+      &.intext{
+        max-height: 15rem;
+
+        @media screen and (max-width: 828px) {
+          display: block;
+        }
+      }
+      */
+    }
+
+    strong{
+      font-size: 1.1em;
+    }
+  }
+}

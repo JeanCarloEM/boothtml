@@ -1,0 +1,50 @@
+section.video{  
+  > .back_blur,
+  > .back_blur > div,
+  &:before{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &:before{
+    z-index: 1;
+    content: ' ';
+    background: rgba(0,0,0,.1);
+  }
+
+  .play{    
+    height: 50vh;
+    min-height: 30rem;    
+    background: url('../img/play-circle-regular.svg') no-repeat;
+    background-size: 10rem;
+    background-position: center center;
+    opacity: .5;    
+    cursor: pointer;
+    z-index: 2;
+    
+    &:hover{
+      opacity: .8;
+    }
+  }
+  
+  > .back_blur{
+    z-index: 0;
+    overflow: hidden;
+    border-bottom: .5rem solid rgba(135,100,53,.5);
+    border-top: .5rem solid rgba(135,100,53,.2);
+
+    > div{
+      bottom: -2.5rem;
+      -webkit-animation: mainback_anime 20s infinite;
+      animation: mainback_anime 20s infinite;
+      background: #555 url('https://previews.123rf.com/images/kasto/kasto1603/kasto160300271/53608878-silhouette-de-femme-libre-jouissant-de-la-libert%C3%A9-se-sentir-heureux-sur-la-plage-au-coucher-du-soleil-.jpg') no-repeat;
+      background-size:cover;
+      background-position: top center;
+      filter: blur(5px);
+      -webkit-filter: blur(5px);
+    }
+  }
+}

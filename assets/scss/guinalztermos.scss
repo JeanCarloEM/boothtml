@@ -1,0 +1,17 @@
+header.first ul.menu > li > label[for=mainmenu]~nav.menu>ul{
+  li{
+    a.privacidade{
+      &:before{
+        content: '\f505' !important;
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free" !important;
+      }
+    }
+    a.home{
+      &:before{
+        content: '\f015' !important;
+        font-weight: 900;
+      }
+    }
+  }
+}

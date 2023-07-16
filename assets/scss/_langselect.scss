@@ -1,0 +1,126 @@
+input#langselector{
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2 !important;  
+}
+
+label[for=langselector]:not(.i18n){
+  margin: 2em;
+}
+
+label[for=langselector].i18n{
+  &,
+  nav.langselect{
+    left: 0;
+    right: 0;    
+    background: #eee;
+    min-width: 10rem;
+    min-height: 10rem;
+    z-index: 10;
+    width: auto;
+    max-width: 100vw;
+  }
+
+  position: fixed;
+  bottom: -100vw;
+  top: 100%;
+  
+  @include transition(.2s);
+
+  nav.langselect{
+    position: absolute;
+    top: 0;
+    bottom: 0;;
+    padding: 3rem;
+    text-align: right;
+    
+    > ul{
+      display: block;
+      max-width: 100%;
+      list-style-type:none;
+      max-height: calc(95vh - 11rem);
+      overflow: auto;
+      padding: 1em;
+      
+      @include box-shadow(0, 0, 1.5em, #dfdfdf);
+      border-bottom: 1px solid #ddd;
+
+      @media screen and (max-width: 500px) {
+        column-count: 1;
+      }
+
+      @media screen and (min-width: 500px) {
+        column-count: 2;
+      }
+
+      @media screen and (min-width: 750px) {
+        column-count: 3;
+      }
+
+      @media screen and (min-width: 1000px) {
+        column-count: 4;
+      }
+
+      column-gap: 3em;
+
+      > li{
+        display: block;
+        border-top: 1px solid #ddd;
+        padding: 0;
+        margin: 0;
+
+        > a{
+          display: block;
+          text-decoration: none;
+          line-height: 2.6rem;
+          padding: 0.25rem .5rem;
+          min-height: 3rem;
+          padding-left: 3.5rem;
+          cursor: pointer;
+
+          &:before,&:after{
+            display: none;
+          }
+
+          span{
+            display: inline-block;
+            text-align: left;
+            line-height: 1.2rem !important;
+            color: #000;
+          }
+
+          > div{
+            height: 1.5rem;
+            width: 2rem;
+            position: absolute;
+            left: .5rem;
+            top: calc(50% - .75rem);
+
+            background: #000;//#f3f3f3 url('../img/flag-regular.svg');
+            background-size: cover !important;
+            background-position: center center;
+            @include box-shadow(0, 0, .5em, #ddd);
+            opacity: .7;
+          }
+
+          &:hover{
+            background: #ccc;
+
+            > div{
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+input#langselector:checked ~ label[for=langselector].i18n{
+  top: 0 !important;
+  bottom: 0 !important;  
+}
