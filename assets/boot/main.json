@@ -11,13 +11,7 @@
       "favicon": "/assets/favicon"
     }
   },
-  "i18next": 13,
+  "i18next": 1,
   "require": [
-    {
-      "async": 0,
-      "lnk": [
-        "${cloudflare}/i18next/23.2.11/i18next.min.js"
-      ]
-    }
   ]
 }

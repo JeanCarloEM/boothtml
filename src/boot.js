@@ -1,8 +1,8 @@
-(function (_, w, $, LG, WN, ER) {
-  _.log = LG;
-  _.warn = WN;
-  _.error = ER;
+const LOG = console.log;
+const WARN = console.warn;
+const ERROR = console.error;
 
+(function (_, w, $, LG, WN, ER) {
   const { fetch: originalFetch } = w;
   w.fetch = async (...args) => {
     let [src, cfg] = args;
@@ -15,24 +15,24 @@
 
   const baseMessageWorker = (worker, title, more) => {
     worker.addEventListener('message', function (e) {
-      if (E.hasOwnProperty("data") && E.data.hasOwnProperty("cmd") && (["log", "warn", "error"].indexOf(E.data.cmd.trim().toLowerCasER()) >= 0)) {
-        let n = E.data.cmd.trim().toLowerCasER();
+      if (e.hasOwnProperty("data") && e.data.hasOwnProperty("cmd") && (["log", "warn", "error"].indexOf(e.data.cmd.trim().toLowerCase()) >= 0)) {
+        let n = e.data.cmd.trim().toLowerCase();
         return ((n === 'log')
-          ? L
+          ? LG
           : (
             (n === "warn")
-              ? W
+              ? WN
               : (
                 (n === "error")
-                  ? E
+                  ? ER
                   : () => {
-                    return morER(e);
+                    return more(e);
                   }
               )
           ))(title + ": " + e.data.msg, e.data.more ? e.data.more : null)
       }
 
-      return morER(e);
+      return more(e);
     });
   };
 
@@ -52,8 +52,8 @@
     })((attr, folder) => {
       try {
         let x = $("script[data-customcfg]")[0].getAttribute(attr);
-        x = (typeof folder !== null && folder) ? x.replace(/\/[^\/]+$/, "") : x;
-        return x.match(/^\s*(http|ftp)s?\:\/\//i) ? x : x = w.location.protocol + "//" + w.location.host + "/" + x.replace(/^\s*\//i, '').replace(/\/s*$/i, '');
+        x = ((typeof folder !== null && folder) ? x.replace(/\/[^\/]+$/, "") : x).trim();
+        return (x.length == 0) ? x : (x.match(/^\s*(http|ftp)s?\:\/\//i) ? x : x = w.location.protocol + "//" + w.location.host + "/" + x.replace(/^\s*\//i, '').replace(/\/s*$/i, ''));
       } catch (e) {
         ER("Failed to get script data: '" + attr + "'.");
         throw e;
@@ -94,14 +94,15 @@
       w.bootworker = BW;
       baseMessageWorker(BW, "BootWorker", (e) => {
         ((dt) => {
-          switch (dt.cmd.trim().toLowerCasER()) {
-            case "load_parser_service":
+          switch (dt.cmd.trim().toLowerCase()) {
+            case "load_parserURLworker".toLowerCase():
               if (parser_service) {
                 return;
               }
 
+              LG('Getting parserURL.worker for boot.');
               parser_service = true;
-              parseworker_start(w.bootroot + "/parseURL.worker.js");
+              parseworker_start(w.bootdata.root + "/parseURL.worker.js");
 
               break;
 
@@ -128,4 +129,4 @@
   };
 
   start();
-})(this, window, (a, b) => { return document.querySelectorAll(a, b) }, console.log, console.warn, console.error);
+})(this, window, (a, b) => { return document.querySelectorAll(a, b) }, LOG, WARN, ERROR);

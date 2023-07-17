@@ -120,19 +120,25 @@
                * LOGIC CONTENT
                */
               (X, K, clbackLogic) => {
-                var mt = K.match(/(?<var>[^\?\|]+)\?(?<true>[^\?\|]*)(\|(?<false>[^\?\|]*))?/i);
+                /* if statement  */
+                var mt = K.match(/(?<var>([^\?\|\&]+(\|\||\&\&))+)\?(?<true>[^\?\|]*)(\|(?<false>[^\?\|]*))?/i);
 
-                ("${" + mt.groups.var.trim() + "}").transform(regex, src, defkey, ukn, filter).then((z) => {
-                  z = z.trim().toLowerCase();
+                if (mt) {
+                  return ("${" + mt.groups.var.trim() + "}").transform(regex, src, defkey, ukn, filter).then((z) => {
+                    z = z.trim().toLowerCase();
 
-                  if ((z == "true") || (isFinite(z) && (parseFloat(z) > 0))) {
-                    return clbackLogic(mt.groups.true ? mt.groups.true : '');
-                  } else if ((z == "false") || (isFinite(z) && (parseFloat(z) == 0))) {
-                    return clbackLogic(mt.groups.false ? mt.groups.false : '');
-                  }
+                    if ((z == "true") || (isFinite(z) && (parseFloat(z) > 0))) {
+                      return clbackLogic(mt.groups.true ? mt.groups.true : '');
+                    } else if ((z == "false") || (isFinite(z) && (parseFloat(z) == 0))) {
+                      return clbackLogic(mt.groups.false ? mt.groups.false : '');
+                    }
 
-                  clbackLogic(z);
-                });
+                    clbackLogic(z);
+                  });
+                }
+
+                /* Funcions, templates or models  */
+                clbackLogic(K);
               }
             );
           });
@@ -156,4 +162,4 @@
     return this.parseI18n(w.i18n());
   };
 
-})(String.prototype, log, warn, error);
+})(String.prototype, LOG, WARN, ERROR);
