@@ -14,6 +14,10 @@
       "${unpkg}/preact@10.16.0/dist/preact.min.js",
       "${boot}/vendor/js/10.16.0.min.js"
     ],
+    "preact-router": [
+      "${unpkg}/preact-router@4.1.1/dist/preact-router.umd.js",
+      "${boot}/vendor/js/preact-router/4.1.1.umd.js"
+    ],
     "babel": [
       "${unpkg}/babel-standalone@23.2.11/babel.min.js",
       "${boot}/vendor/js/i18next/23.2.11.min.js"
@@ -25,6 +29,7 @@
   },
   "require": [
     "${lib.preact}",
+    "${lib.preact-router}",
     "${i18next?${lib.i18next}|}",
     "${jsx?${lib.babel}|}"
   ]

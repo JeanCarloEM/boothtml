@@ -1,7 +1,7 @@
-(function (_, w, $, L, W, E) {
-  _.log = L;
-  _.warn = W;
-  _.error = E;
+(function (_, w, $, LG, WN, ER) {
+  _.log = LG;
+  _.warn = WN;
+  _.error = ER;
 
   const { fetch: originalFetch } = w;
   w.fetch = async (...args) => {
@@ -15,8 +15,8 @@
 
   const baseMessageWorker = (worker, title, more) => {
     worker.addEventListener('message', function (e) {
-      if (E.hasOwnProperty("data") && E.data.hasOwnProperty("cmd") && (["log", "warn", "error"].indexOf(E.data.cmd.trim().toLowerCase()) >= 0)) {
-        let n = E.data.cmd.trim().toLowerCase();
+      if (E.hasOwnProperty("data") && E.data.hasOwnProperty("cmd") && (["log", "warn", "error"].indexOf(E.data.cmd.trim().toLowerCasER()) >= 0)) {
+        let n = E.data.cmd.trim().toLowerCasER();
         return ((n === 'log')
           ? L
           : (
@@ -26,25 +26,75 @@
                 (n === "error")
                   ? E
                   : () => {
-                    return more(e);
+                    return morER(e);
                   }
               )
           ))(title + ": " + e.data.msg, e.data.more ? e.data.more : null)
       }
 
-      return more(e);
+      return morER(e);
     });
   };
 
-  const bootworker_start = (url) => {
-    L("Initializing BootWorker from url '" + url + "'.");
+  const readScriptData = () => {
+    LG("Getting root boot path...");
+
+    ((readS) => {
+      w.bootdata = {
+        "root": readS('src', 1),
+        "cfg": {
+          "custom": readS('data-customcfg'),
+          "customroot": readS('data-customcfg', 1),
+          "more": readS('data-morecfg'),
+          "moreroot": readS('data-morecfg', 1)
+        }
+      };
+    })((attr, folder) => {
+      try {
+        let x = $("script[data-customcfg]")[0].getAttribute(attr);
+        x = (typeof folder !== null && folder) ? x.replace(/\/[^\/]+$/, "") : x;
+        return x.match(/^\s*(http|ftp)s?\:\/\//i) ? x : x = w.location.protocol + "//" + w.location.host + "/" + x.replace(/^\s*\//i, '').replace(/\/s*$/i, '');
+      } catch (e) {
+        ER("Failed to get script data: '" + attr + "'.");
+        throw e;
+      }
+    });
+
+    LG("Boot root is '" + w.bootdata.root + "'");
+    LG("Custom CFG is '" + w.bootdata.cfg.custom + "'");
+    LG("More CFG is '" + w.bootdata.cfg.more + "'");
+
+    return w.bootdata;
+  }
+
+  const parseworker_start = async (url) => {
+    LG("Registering ParseWorker from url '" + url + "'.");
+
+    navigator.serviceWorker.register(url)
+      .then((PU) => {
+        w.bootworker = PU;
+
+        baseMessageWorker(PU, "ParserWorker", (e) => {
+
+        });
+
+        LG("ParseWorker registered from '" + url + "'.");
+      }).catch((e) => {
+        ER(e);
+      });
+  };
+
+  const bootworker_start = async () => {
+    readScriptData();
+
+    LG("Initializing BootWorker from url '" + w.bootdata.root + "/bootworker.js'.");
     var parser_service = false;
 
     ((BW) => {
       w.bootworker = BW;
       baseMessageWorker(BW, "BootWorker", (e) => {
         ((dt) => {
-          switch (dt.cmd.trim().toLowerCase()) {
+          switch (dt.cmd.trim().toLowerCasER()) {
             case "load_parser_service":
               if (parser_service) {
                 return;
@@ -61,55 +111,20 @@
         })(e.data);
       });
 
-      BW.postMessage({ "cmd": "start", "bootroot": w.bootroot, "boot_customcfg": w.boot_customcfg, "location": JSON.parse(JSON.stringify(w.location)) });
-    })(new Worker(url));
+      BW.postMessage({
+        "cmd": "start",
+        "bootdata": w.bootdata,
+        "location": JSON.parse(JSON.stringify(w.location))
+      });
+    })(new Worker(w.bootdata.root + "/bootworker.js"));
   };
 
-  const parseworker_start = (url) => {
-    L("Registering ParseWorker from url '" + url + "'.");
-
-    navigator.serviceWorker.register(url)
-      .then((PU) => {
-        w.bootworker = PU;
-
-        baseMessageWorker(PU, "ParserWorker", (e) => {
-
-        });
-
-        L("ParseWorker registered from '" + url + "'.");
-      }).catch((e) => {
-        E(e);
-      });
+  const parse_SEO = async (url) => {
+    LG("Preparing the SEO analyzer...");
   };
 
   const start = () => {
-    L("Getting root boot path...")
-
-    try {
-      w.bootroot = (() => {
-        let url = $("script[data-customcfg]")[0].getAttribute("src").replace(/\/boot(\.min)?\.js.*/gi, "");
-        if (!url.match(/^\s*(http|ftp)s?\:\/\//i)) {
-          url = w.location.protocol + "//" + w.location.host + "/" + url.replace(/^\s*\//i, '').replace(/\/s*$/i, '');
-        }
-
-        return url;
-      })();
-
-      w.boot_customcfg = (() => {
-        let url = $("script[data-customcfg]")[0].getAttribute("data-customcfg");
-        if (!url.match(/^\s*(http|ftp)s?\:\/\//i)) {
-          url = w.location.protocol + "//" + w.location.host + "/" + url.replace(/^\s*\//i, '').replace(/\/s*$/i, '');
-        }
-
-        return url;
-      })();
-    } catch (e) {
-      throw "Failed to get bootworker url.";
-    }
-
-    L("Boot root is '" + w.bootroot + "'");
-    L("Custom CFG is '" + w.boot_customcfg + "'");
-    bootworker_start(w.bootroot + "/bootworker.js");
+    parse_SEO() && bootworker_start();
   };
 
   start();

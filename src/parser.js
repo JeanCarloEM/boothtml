@@ -1,5 +1,5 @@
-(function (STR, L, W, E) {
-  /* DUPLICATE process */
+(function (STR, LG, WN, E) {
+  /* WARN:: Duplicate regex matching is not efficient, find a better way */
   STR.replaceAsync = async function (regex, asyncFn) {
     const promises = [];
     this.replace(regex, (match, ...args) => {
@@ -38,6 +38,7 @@
       var c = 0;
 
       ((checker, process) => {
+        /* WHILE REGEX MATCH */
         (function recheck(l) {
           checker(process, (r, terminate) => {
             n = r;
@@ -45,7 +46,7 @@
               return R0(n);
             }
 
-            recheck(35);
+            recheck(1);
           });
         })();
 
@@ -54,7 +55,7 @@
         return (n.match(regex) && (c < m))
           ? n.replaceAsync(regex, async (m, ctt, oset, input_string) => {
             if ((++c) > m) {
-              E('Over processing.');
+              ER('Over processing.');
               return clbackCheck(n);
             }
 
@@ -105,7 +106,7 @@
                 /* FOREACH Hierarchical KEYS */
                 for (let i = 0; i < K.length; i++) {
                   if (chcl(X, K[i])) {
-                    W("Not parse item [" + K.join("][") + "] in '" + n + "'");
+                    WN("Not parse item [" + K.join("][") + "] in '" + n + "'");
                     clbackH(prc(fX, K[i]));
                   }
 

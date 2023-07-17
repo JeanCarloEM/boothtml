@@ -1,5 +1,5 @@
 (function (_) {
-  ((L, W, E) => {
+  ((LG, WN, ER) => {
     _.addEventListener('install', function (e) {
       W("Installing worker...");
 
