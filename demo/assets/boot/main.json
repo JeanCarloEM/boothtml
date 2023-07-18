@@ -1,0 +1,17 @@
+{
+  "url": {
+    "bootjs": "/demo/assets/js/boot/",
+    "basehtml": "/pgs/base.html",
+    "loadingexitcall": null,
+    "local": {
+      "js": "/demo/assets/js",
+      "css": "/demo/assets/css",
+      "img": "/demo/assets/img",
+      "fonts": "/demo/assets/fonts",
+      "favicon": "/demo/assets/favicon"
+    }
+  },
+  "i18next": 1,
+  "require": [
+  ]
+}

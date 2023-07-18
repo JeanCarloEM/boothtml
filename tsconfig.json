@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "dist/latest/",
+    "target": "es6",
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmitOnError": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "lib": [
+      "es5",
+      "dom",
+      "webworker"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/**/*"
+  ]
+}

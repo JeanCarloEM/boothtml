@@ -62,15 +62,17 @@ const URLKEY = "URLKEY";
           _.location = dt.location;
 
           LG(TAG + "Getting configuration.");
-          WN('6589');
+          LG('----');
           _.batchLoad("CFG", [
             _.bootdata.root + "/cfg.json",
             _.bootdata.cfg.custom,
             _.bootdata.cfg.more
           ], r => r.json()).then((x) => {
             _.setWorker(mergeObj(x[0], x[1], x.length > 2 ? x[2] : []));
+            LG('9888');
           });
-          LG('9888');
+          LG(7777);
+
           break;
 
         default:
@@ -80,6 +82,7 @@ const URLKEY = "URLKEY";
   });
 
   _.setWorker = (cfg) => {
+    LG('1111');
     _.replacement = Object.assign({}, cfg.url.sym);
     _.replacement.lib = Object.assign({}, cfg.lib);
     _.replacement.boot = _.bootdata.root;
