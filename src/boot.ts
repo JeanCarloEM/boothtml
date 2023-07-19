@@ -1,7 +1,19 @@
+interface bootCFG {
+  paths: {
+    root: String,
+    customcfg?: String,
+    customroot?: String,
+    morecfg?: String,
+    moreroot?: String
+  }
+}
+
 declare global {
-  interface window {
-    bootdata: object;
+  interface Window {
+    bootdata: bootCFG;
     bootworker: Worker;
+    transformeAndCacheWorker: ServiceWorkerRegistration,
+    tel:324579
   }
 }
 
@@ -9,12 +21,21 @@ const LOG = console.log;
 const WARN = console.warn;
 const ERROR = console.error;
 const w = window;
-const $ = (x: string) => { return document.querySelectorAll(x); }
-const bootWorkerFile = "bootworker";
-const bootSWorkerFile = "bootworker";
+const $ = document.querySelectorAll;
 
-export class bootHTML {
-  private baseMessageWorker(worker: any, title: String, more: CallableFunction) {
+/*
+ *
+ */
+export abstract class bootHTML {
+  static readonly bootWorkerFile = "bootworker";
+  static readonly bootSWorkerFile = "bootworker";
+
+  public static start() {
+    this.parse_SEO();
+    this.bootworker_start();
+  };
+
+  private static baseMessageWorker(worker: any, title: String, more: CallableFunction) {
     worker.addEventListener('message', function (e: any) {
       if (e.hasOwnProperty("data") && e.data.hasOwnProperty("cmd") && (["log", "warn", "error"].indexOf(e.data.cmd.trim().toLowerCase()) >= 0)) {
         let n = e.data.cmd.trim().toLowerCase();
@@ -37,20 +58,20 @@ export class bootHTML {
     });
   };
 
-  private readScriptData() {
+  private static readScriptData() {
     LOG("Getting root boot path...");
 
-    ((readS) => {
-      (<any>w).bootdata = {
-        "root": readS('src', true),
-        "cfg": {
-          "custom": readS('data-customcfg'),
-          "customroot": readS('data-customcfg', true),
-          "more": readS('data-morecfg'),
-          "moreroot": readS('data-morecfg', true)
+    ((readS: Function) => {
+      w.bootdata = <bootCFG>{
+        paths: {
+          root: readS('src', true),
+          customcfg: readS('data-customcfg'),
+          customroot: readS('data-customcfg', true),
+          morecfg: readS('data-morecfg'),
+          moreroot: readS('data-morecfg', true)
         }
       };
-    })((attr: any, folder: Boolean = false) => {
+    })((attr: string, folder: Boolean = false): string => {
       try {
         let x = $("script[data-customcfg]")[0].getAttribute(attr) + "";
         x = (folder ? x.replace(/\/[^\/]+$/, "") : x).trim();
@@ -61,19 +82,19 @@ export class bootHTML {
       }
     });
 
-    LOG("Boot root is '" + (<any>w).bootdata.root + "'");
-    LOG("Custom CFG is '" + (<any>w).bootdata.cfg.custom + "'");
-    LOG("More CFG is '" + (<any>w).bootdata.cfg.more + "'");
+    LOG("Boot root is '" + w.bootdata.paths.root + "'");
+    LOG("Custom CFG is '" + w.bootdata.paths.customcfg + "'");
+    LOG("More CFG is '" + w.bootdata.paths.morecfg + "'");
 
-    return (<any>w).bootdata;
+    return w.bootdata;
   }
 
-  private async parseworker_start(url: string) {
+  private static async parseworker_start(url: string) {
     LOG("Registering ParseWorker from url '" + url + "'.");
 
     navigator.serviceWorker.register(url)
       .then((PU) => {
-        (<any>w).bootworker = PU;
+        w.transformeAndCacheWorker = PU;
 
         this.baseMessageWorker(PU, "ParserWorker", (e: Event) => {
 
@@ -85,14 +106,14 @@ export class bootHTML {
       });
   };
 
-  private async bootworker_start() {
+  private static async bootworker_start() {
     this.readScriptData();
 
-    LOG("Initializing BootWorker from url '" + (<any>w).bootdata.root + "/" + bootWorkerFile + ".js'.");
+    LOG("Initializing BootWorker from url '" + w.bootdata.paths.root + "/" + this.bootWorkerFile + ".js'.");
     var parser_service = false;
 
     ((BW) => {
-      (<any>w).bootworker = BW;
+      w.bootworker = BW;
       this.baseMessageWorker(BW, "BootWorker", (e: any) => {
         ((dt) => {
           switch (dt.cmd.trim().toLowerCase()) {
@@ -103,7 +124,7 @@ export class bootHTML {
 
               LOG('Getting parserURL.worker for boot.');
               parser_service = true;
-              this.parseworker_start((<any>w).bootdata.root + "/parseURL.worker.js");
+              this.parseworker_start(w.bootdata.paths.root + "/parseURL.worker.js");
 
               break;
 
@@ -115,18 +136,13 @@ export class bootHTML {
 
       BW.postMessage({
         "cmd": "start",
-        "bootdata": (<any>w).bootdata,
+        "bootdata": w.bootdata,
         "location": JSON.parse(JSON.stringify(w.location))
       });
-    })(new Worker((<any>w).bootdata.root + "/" + bootWorkerFile + ".js"));
+    })(new Worker(w.bootdata.paths.root + "/" + this.bootWorkerFile + ".js"));
   };
 
-  private async parse_SEO() {
+  private static async parse_SEO() {
     LOG("Preparing the SEO analyzer...");
-  };
-
-  constructor() {
-    this.parse_SEO();
-    this.bootworker_start();
   };
 }

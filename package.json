@@ -9,9 +9,14 @@
     "compile": "tsc",
     "compile1": "cross-env-shell babel $INIT_CWD -d $INIT_CWD --extensions '.ts' --no-comments --source-maps",
     "typecheck-compile": "npm run typecheck && npm run compile",
-    "watch": "tsc -w",
+    "treatjs": "concurrently \"npm run minify\" \"npm run prettier_dist\"",
+    "minify": "uglifyjs \"dist\"",
+    "prettier_dist": "prettier --write \"dist\"",
+    "watch": "tsc-watch --onSuccess \"npm run treatjs\"",
     "server": "lite-server --baseDir=",
-    "start": "concurrently \"npm run watch\" \"npm run server\""
+    "copy": "cpx -w -f \"src/**\" \"dist/\" -p --ignore \"*.ts\"",
+    "start": "concurrently \"npm run copy\" \"npm run watch\"",
+    "glob_dist": "glob \"dist/**/*.js\" -i \"dist/**/*.min.js\""
   },
   "repository": {
     "type": "git",
@@ -23,15 +28,21 @@
     "url": "https://github.com/JeanCarloEM/boothtml/issues"
   },
   "homepage": "https://boothtml.jcem.pro",
-  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-typescript": "^7.22.5",
+    "babel-minify": "^0.5.2",
     "concurrently": "8.2.0",
+    "cpx2": "^5.0.0",
     "cross-env": "^7.0.3",
+    "glob": "^10.3.3",
+    "lite-server": "^2.6.1",
+    "minify": "^10.3.0",
+    "prettier": "^3.0.0",
+    "tsc-watch": "^6.0.4",
     "typescript": "^5.1.6",
-    "lite-server": "^2.6.1"
+    "uglify-js": "^3.17.4"
   }
 }

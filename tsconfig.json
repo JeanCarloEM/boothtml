@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
-    "outDir": "dist/latest/",
+    "outDir": "dist/",
     "target": "es6",
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
     "noEmitOnError": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "noImplicitAny": true,
     "sourceMap": true,
+    "removeComments": true,
     "module": "esnext",
+    "declaration": true,
+    "alwaysStrict": true,
     "lib": [
-      "es5",
+      "es6",
       "dom",
       "webworker"
     ]
@@ -22,5 +29,7 @@
   ],
   "exclude": [
     "node_modules/**/*"
-  ]
+
+  ],
+  "hooks": [ "copy-files" ]
 }

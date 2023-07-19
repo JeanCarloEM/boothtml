@@ -1,0 +1,36 @@
+{
+  "url": {
+    "sym": {
+      "cloudflare": "//cdnjs.cloudflare.com/ajax/libs",
+      "unpkg": "//unpkg.com",
+      "gfont": "//fonts.googleapis.com",
+      "esmsh": "//esm.sh/stable"
+    }
+  },
+  "i18next": 0,
+  "jsx": 0,
+  "lib": {
+    "preact": [
+      "${unpkg}/preact@10.16.0/dist/preact.min.js",
+      "${boot}/vendor/js/10.16.0.min.js"
+    ],
+    "preact-router": [
+      "${unpkg}/preact-router@4.1.1/dist/preact-router.umd.js",
+      "${boot}/vendor/js/preact-router/4.1.1.umd.js"
+    ],
+    "babel": [
+      "${unpkg}/babel-standalone@23.2.11/babel.min.js",
+      "${boot}/vendor/js/i18next/23.2.11.min.js"
+    ],
+    "i18next": [
+      "${unpkg}/i18next@23.2.11/i18next.min.js",
+      "${boot}/vendor/js/babel/6.26.0.min.js"
+    ]
+  },
+  "require": [
+    "${lib.preact}",
+    "${lib.preact-router}",
+    "${i18next?${lib.i18next}|}",
+    "${jsx?${lib.babel}|}"
+  ]
+}
