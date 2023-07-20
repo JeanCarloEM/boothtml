@@ -14,7 +14,7 @@ String.prototype.tranform = function (
   ukn: TSReplacer,
   filterValue: TSReplacerFilter
 ): Promise<string> {
-  return (new textParser(this + "", src, defkey, ukn, filterValue)).run();
+  return (new textParserCore(this + "", src, defkey, ukn, filterValue)).run();
 }
 
 
@@ -22,7 +22,7 @@ String.prototype.tranform = function (
  *
  */
 
-class textParser extends textBasicParser {
+class textParserCore extends textBasicParser {
   constructor(
     protected str: string,
     private readonly src?: TSSource,
