@@ -4,7 +4,7 @@ String.prototype.tranform = function (regex, src, defkey, ukn, filterValue) {
 };
 class textParserCore extends textBasicParser {
     constructor(str, src, defkey, ukn, filter) {
-        super(str, /(?<open>\$|(?!(\\[\w\d]+))\{{1,3})(?<content>(?:[^\{\}\$\\]|\\.)*)(?<close>\}{1,3})/gi, filter);
+        super(str, /(?<open>(?!\\\w[\w\d\-_\.]*)\$?\{{1,3})(?<content>(?:[^\{\}\$\\]|\\.)*)(?<close>\}{1,3})/gi, filter);
         this.str = str;
         this.src = src;
         this.defkey = defkey;
