@@ -30,12 +30,12 @@ class textParserCore extends textBasicParser {
     private readonly ukn?: TSReplacer,
     protected readonly filter?: TSReplacerFilter
   ) {
-    super(str, /(\$|\{)\{((?:[^\{\}\$\\]|\\.)*)\}\}?/gi, filter);
+    super(str, /(?<open>\$|(?!(\\[\w\d]+))\{{1,3})(?<content>(?:[^\{\}\$\\]|\\.)*)(?<close>\}{1,3})/gi, filter);
   }
 
   protected processMatch(match: RegExpMatchArray): Promise<string> {
     return new Promise<string>((R0, R_0) => {
-      R0('a');
+
     });
   }
 }
