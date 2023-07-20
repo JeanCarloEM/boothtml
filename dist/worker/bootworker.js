@@ -36,10 +36,10 @@ const URLKEY = "URLKEY";
     return to;
   };
 
-  _.addEventListener("message", function (e) {
-    if (!e.data || !e.data.hasOwnProperty("cmd")) {
+  _.addEventListener('message', function (e) {
+    if (!e.data || !e.data.hasOwnProperty('cmd')) {
       return;
-    }
+    };
 
     ((dt) => {
       switch (dt.cmd.trim().toLowerCase()) {
@@ -50,7 +50,7 @@ const URLKEY = "URLKEY";
 
           _.started = true;
 
-          LG(TAG + "Importando scrips.");
+          LG(TAG + "Importando scrips.")
 
           importScripts("common.js?v=9");
           importScripts("batchLoad.js?v=" + _.uid());
@@ -62,18 +62,14 @@ const URLKEY = "URLKEY";
           _.location = dt.location;
 
           LG(TAG + "Getting configuration.");
-          LG("----");
-          _.batchLoad(
-            "CFG",
-            [
-              _.bootdata.root + "/cfg.json",
-              _.bootdata.cfg.custom,
-              _.bootdata.cfg.more,
-            ],
-            (r) => r.json(),
-          ).then((x) => {
+          LG('----');
+          _.batchLoad("CFG", [
+            _.bootdata.root + "/cfg.json",
+            _.bootdata.cfg.custom,
+            _.bootdata.cfg.more
+          ], r => r.json()).then((x) => {
             _.setWorker(mergeObj(x[0], x[1], x.length > 2 ? x[2] : []));
-            LG("9888");
+            LG('9888');
           });
           LG(7777);
 
@@ -86,24 +82,23 @@ const URLKEY = "URLKEY";
   });
 
   _.setWorker = (cfg) => {
-    LG("1111");
+    LG('1111');
     _.replacement = Object.assign({}, cfg.url.sym);
     _.replacement.lib = Object.assign({}, cfg.lib);
     _.replacement.boot = _.bootdata.root;
     _.replacement.customroot = _.bootdata.cfg.customroot;
     _.replacement = Object.assign(_.replacement, cfg);
 
-    JSON.stringify(cfg)
-      .parseText(_.replacement)
-      .then((x) => {
-        x = x.replace(/\s*\/\//g, "https://");
-        _.cfg = JSON.parse(x);
-        LG(TAG + "Boot Configurations is ready.");
-        _.postMessage({ cmd: "load_parserURLworker" });
-      });
+    JSON.stringify(cfg).parseText(_.replacement).then((x) => {
+      x = x.replace(/\s*\/\//g, "https://");
+      _.cfg = JSON.parse(x);
+      LG(TAG + "Boot Configurations is ready.");
+      _.postMessage({ cmd: "load_parserURLworker" });
+    });
   };
 
-  _.addEventListener("fetch", function (e) {
+  _.addEventListener('fetch', function (e) {
     WN('Fetching "' + e.request + '"');
   });
+
 })(self, LOG, WARN, ERROR);

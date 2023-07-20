@@ -1,7 +1,7 @@
 //const { minify } = require("minify");
 const { Glob } = require("glob");
 const { readFile, writeFile } = require('fs');
-//const tryToCatch = require('try-to-catch');
+const tryToCatch = require('try-to-catch');
 
 const g = new Glob('dist/**/*.js', {
   ignore: {
@@ -17,35 +17,7 @@ for (const file of g) {
       return;
     }
 
-    console.log("\n\n\n");
-    console.log(file);
+    tryToCatch(minify, './client.js', options);
 
-    const tab = /^\t/gm;
-    const space =/^\s{4}/gm;
-
-    /* Normalize ident type */
-    while (ctt.match(tab)) {
-      console.log("======================");
-      ctt = ctt.replace(tab, "    ");
-    }
-
-    /* convert to tab */
-    while (ctt.match(space)) {
-      console.log("+++++++++++++++++++++++");
-      ctt = ctt.replace(space, "\t")
-    }
-
-    /* convert to 2 size space */
-    while (ctt.match(tab)) {
-      console.log("///////////////////");
-      ctt = ctt.replace(tab, "  ");
-    }
-
-    console.log("\n");
-    console.log(ctt);
-
-    writeFile(file, ctt, 'utf-8', function (err) {
-      console.log(err);
-    });
   });
 }

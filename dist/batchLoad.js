@@ -1,12 +1,7 @@
 ((_, LG, WN, ER) => {
   _.batchLoad = async (id, list, clbackEach, async) => {
     async = typeof async === "undefined" ? false : async;
-    const _clbackEach =
-      typeof clbackEach === "function"
-        ? clbackEach
-        : (x) => {
-            return x;
-          };
+    const _clbackEach = (typeof clbackEach === 'function') ? clbackEach : (x) => { return x; };
 
     LG(TAG + (async ? "Async" : "Sync") + " downloading batch '" + id + "' .");
 
@@ -15,11 +10,11 @@
 
     const EachProgress = async (r) => {
       return _clbackEach(r, ++_completed, _total);
-    };
+    }
 
     const incTotal = (len) => {
       _total += isFinite(len) ? len : 0;
-    };
+    }
 
     return new Promise((OK, FAIL) => {
       var resps = [];
@@ -32,19 +27,13 @@
         ignoreCheck = ignoreCheck === true || ignoreCheck >= 1 ? true : false;
 
         if (
-          (typeof l !== "object" &&
-            typeof l !== "string" &&
-            !Array.isArray(l)) ||
-          (Array.isArray(l) && l.length == 0) ||
-          (!Array.isArray(l) &&
-            typeof l !== "string" &&
-            (!l.hasOwnProperty(SUBGROUP) || l[SUBGROUP].length == 0) &&
-            (!l.hasOwnProperty(URLKEY) || l[URLKEY].length == 0))
-        )
-          return;
+          ((typeof l !== "object") && (typeof l !== "string") && !Array.isArray(l)) ||
+          ((Array.isArray(l)) && (l.length == 0)) ||
+          ((!Array.isArray(l)) && (typeof l !== "string") && (!l.hasOwnProperty(SUBGROUP) || l[SUBGROUP].length == 0) && (!l.hasOwnProperty(URLKEY) || l[URLKEY].length == 0))
+        ) return;
 
         /* RECALL IF IS OBJECT */
-        if (typeof l === "object" && l.hasOwnProperty(SUBGROUP)) {
+        if ((typeof l === "object") && l.hasOwnProperty(SUBGROUP)) {
           return CALLER.callee(l[SUBGROUP], l.async);
         }
 
@@ -84,21 +73,16 @@
 
         /* "4" or "B" possibility, Object.URLKEY */
         /* convert to "A" */
-        if (typeof iurl === "object" && iurl.hasOwnProperty(URLKEY)) {
-          return CALLER.callee(
-            iurl[URLKEY],
-            l.async,
-            false,
-            iurl.hasOwnProperty("require") ? iurl.require : 1,
-          );
+        if ((typeof iurl === "object") && iurl.hasOwnProperty(URLKEY)) {
+          return CALLER.callee(iurl[URLKEY], l.async, false, iurl.hasOwnProperty('require') ? iurl.require : 1);
         }
 
         /* "5" -> "C" possibility, STRING, */
         /* convert to "A" */
-        if (typeof iurl === "string") {
+        if ((typeof iurl === "string")) {
           iurl = [iurl];
         } else if (!Array.isArray(iurl)) {
-          throw TAG + "Unforeseen possibility in 'batchLoad'";
+          throw (TAG + "Unforeseen possibility in 'batchLoad'");
         }
 
         /* IGNORE "" URL */
@@ -136,21 +120,14 @@
               return CALLER.callee([urls].concat(l), rasync, true);
             }
 
-            ER(
-              TAG +
-                "Failed to get bach '" +
-                id +
-                "', item '" +
-                iurl.URLKEY +
-                "'",
-            );
+            ER(TAG + "Failed to get bach '" + id + "', item '" + iurl.URLKEY + "'");
             FAIL(e);
           })
           .then((r) => {
             LG(TAG + "Loaded '" + lnk + "'.");
             let rr = EachProgress(r);
 
-            if (typeof rr === "object" && typeof rr.then === "function") {
+            if ((typeof rr === 'object' && typeof rr.then === 'function')) {
               return rr.then((x) => {
                 resps.push(x);
                 gogo();
@@ -168,4 +145,5 @@
       })(list, async);
     });
   };
+
 })(self, LOG, WARN, ERROR);
