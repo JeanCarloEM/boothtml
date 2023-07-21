@@ -1,0 +1,48 @@
+{
+  "name": "strtransformjs",
+  "version": "1.0.0",
+  "description": "Client-side string/texto render, wikitext abd react compatibility, expandable with látex, markdown and more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --p .",
+    "compile": "tsc",
+    "compile1": "cross-env-shell babel $INIT_CWD -d $INIT_CWD --extensions '.ts' --no-comments --source-maps",
+    "typecheck-compile": "npm run typecheck && npm run compile",
+    "treatjs": "concurrently \"npm run minify\" \"npm run prettier_dist\"",
+    "treatjs2": "",
+    "minify": "uglifyjs \"dist/*\" -o scripts.min.js",
+    "prettier_dist": "prettier --write \"dist\"",
+    "watch": "tsc-watch --onSuccess \"npm run treatjs2\"",
+    "server": "lite-server --baseDir=",
+    "copy": "cpx -w -f \"src/**\" \"dist/\" -p --ignore \"*.ts\"",
+    "start": "concurrently \"npm run copy\" \"npm run watch\" \"npm run server\"",
+    "glob_dist": "glob \"dist/**/*.js\" -i \"dist/**/*.min.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeanCarloEM/strtransformjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeanCarloEM/strtransformjs/issues"
+  },
+  "homepage": "https://strtransformjs.jcem.pro",
+  "devDependencies": {
+    "@babel/cli": "^7.22.9",
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-typescript": "^7.22.5",
+    "babel-minify": "^0.5.2",
+    "concurrently": "8.2.0",
+    "cpx2": "^5.0.0",
+    "cross-env": "^7.0.3",
+    "glob": "^10.3.3",
+    "lite-server": "^2.6.1",
+    "minify": "^10.3.0",
+    "prettier": "^3.0.0",
+    "tsc-watch": "^6.0.4",
+    "typescript": "^5.1.6"
+  }
+}
