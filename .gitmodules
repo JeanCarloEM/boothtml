@@ -1,0 +1,3 @@
+[submodule "src/vendor/strtransformjs"]
+	path = src/vendor/strtransformjs
+	url = https://github.com/JeanCarloEM/strtransformjs.git
